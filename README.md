@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-# Brainwave - Modern Animated SaaS Generative AI Landing Page
+# Brainy - Modern Animated SaaS Generative AI Landing Page
 
 ![Brainwave - Modern Animated SaaS Generative AI Landing Page]
 <!-- Table of Contents -->
