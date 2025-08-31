@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
-import { useClerk } from "@clerk/clerk-react";
+import { useUser, useClerk } from "@clerk/clerk-react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { Link } from "react-router-dom";
 import { brainy } from "../../assets";
@@ -8,7 +8,8 @@ import Button from "../Button";
 import Section from "../Section";
 
 const Dashboard = () => {
-  const { user, signOut } = useClerk();
+  const { user } = useUser();
+  const { signOut } = useClerk();
   const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -660,7 +661,6 @@ const Dashboard = () => {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                     >
                       <motion.div 
                         className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${achievement.color} flex items-center justify-center text-3xl mb-4 mx-auto`}

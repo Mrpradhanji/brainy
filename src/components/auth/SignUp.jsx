@@ -1,9 +1,12 @@
 import { SignUp as ClerkSignUp } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { brainy } from "../../assets";
 
 const SignUp = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -36,22 +39,42 @@ const SignUp = () => {
 
         {/* Clerk SignUp Component */}
         <ClerkSignUp 
-                           appearance={{
-                   elements: {
-                     rootBox: "mx-auto",
-                     card: "bg-amber-50 border border-amber-200 rounded-2xl shadow-xl",
-                     headerTitle: "text-n-8",
-                     headerSubtitle: "text-n-6",
-                     formButtonPrimary: "bg-gradient-to-r from-color-1 to-color-2 hover:from-color-2 hover:to-color-1 text-n-8 font-medium rounded-xl",
-                     formFieldInput: "bg-white border border-amber-200 text-n-8 placeholder-n-4 rounded-xl focus:border-color-1 focus:ring-color-1",
-                     formFieldLabel: "text-n-7",
-                     footerActionLink: "text-color-1 hover:text-color-2",
-                     dividerLine: "bg-amber-200",
-                     dividerText: "text-n-5"
-                   }
-                 }}
-          afterSignUpUrl="/dashboard"
+          appearance={{
+            elements: {
+              rootBox: "mx-auto",
+              card: "bg-cream-50 border border-amber-200 rounded-2xl shadow-xl",
+              headerTitle: "text-n-8",
+              headerSubtitle: "text-n-6",
+              formButtonPrimary: "bg-gradient-to-r from-color-1 to-color-2 hover:from-color-2 hover:to-color-1 text-n-8 font-medium rounded-xl",
+              formFieldInput: "bg-white border border-amber-200 text-n-8 placeholder-n-4 rounded-xl focus:border-color-1 focus:ring-color-1",
+              formFieldLabel: "text-n-7",
+              footerActionLink: "text-color-1 hover:text-color-2",
+              dividerLine: "bg-amber-200",
+              dividerText: "text-n-5"
+            }
+          }}
+          afterSignUpUrl={from}
+          redirectUrl={from}
         />
+        
+        {/* Additional Sign In Link */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          <p className="text-n-3 mb-2">
+            Already have an account?{" "}
+            <Link 
+              to="/sign-in" 
+              state={{ from: location }}
+              className="text-color-1 hover:text-color-2 font-medium transition-colors duration-200"
+            >
+              Sign in here
+            </Link>
+          </p>
+        </motion.div>
       </motion.div>
     </div>
   );

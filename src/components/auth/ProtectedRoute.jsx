@@ -1,9 +1,9 @@
-import { useAuth } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { Navigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const ProtectedRoute = ({ children }) => {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded, user } = useUser();
   const location = useLocation();
 
   if (!isLoaded) {
@@ -20,14 +20,15 @@ const ProtectedRoute = ({ children }) => {
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
-          <p className="text-n-3">Loading...</p>
+          <p className="text-n-3">Loading authentication...</p>
         </motion.div>
       </div>
     );
   }
 
-  if (!isSignedIn) {
-    return <Navigate to="/signin" state={{ from: location }} replace />;
+  if (!isSignedIn || !user) {
+    // Redirect to sign-in with the current location for post-login redirect
+    return <Navigate to="/sign-in" state={{ from: location }} replace />;
   }
 
   return children;
