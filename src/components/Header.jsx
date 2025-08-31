@@ -1,6 +1,7 @@
 import { brainy } from "../assets";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { useAuth, useUser, useClerk } from "@clerk/clerk-react";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
 import MenuSvg from "../assets/svg/MenuSvg";
@@ -12,6 +13,9 @@ import { HambugerMenu } from "./design/Header";
 const Header = () => {
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
+  const { isSignedIn, isLoaded } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
 
   const toggleNavigation = () => {
     if (openNavigation) {
@@ -28,6 +32,14 @@ const Header = () => {
 
     enablePageScroll();
     setOpenNavigation(false);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   return (
@@ -76,17 +88,50 @@ const Header = () => {
           <HambugerMenu />
         </nav>
 
-        <Button className="hidden lg:flex" href={links.login} external>
-          Login
-        </Button>
+        {/* Auth Buttons */}
+        <div className="ml-auto flex items-center space-x-4">
+          {isLoaded && (
+            <>
+              {isSignedIn ? (
+                <div className="flex items-center space-x-4">
+                  <Link
+                    to="/dashboard"
+                    className="hidden lg:flex text-sm text-n-2 hover:text-n-1 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <span className="hidden lg:block text-sm text-n-3">
+                    {user?.firstName || user?.emailAddresses[0]?.emailAddress}
+                  </span>
+                  <Button onClick={handleSignOut} className="hidden lg:flex">
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <Link to="/sign-in" className="hidden lg:block">
+                    <Button className="hidden lg:flex">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/sign-up" className="hidden lg:block">
+                    <Button className="hidden lg:flex" white>
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </>
+          )}
 
-        <Button
-          onClick={toggleNavigation}
-          className="ml-auto lg:hidden"
-          px="px-3"
-        >
-          <MenuSvg openNavigation={openNavigation} />
-        </Button>
+          <Button
+            onClick={toggleNavigation}
+            className="ml-auto lg:hidden"
+            px="px-3"
+          >
+            <MenuSvg openNavigation={openNavigation} />
+          </Button>
+        </div>
       </div>
     </div>
   );

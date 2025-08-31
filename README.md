@@ -8,7 +8,7 @@
 [![GitHub license](https://flat.badgen.net/github/license/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/blob/main/LICENSE "GitHub license")
 [![Maintenance](https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/commits/main "Maintenance")
 [![GitHub branches](https://flat.badgen.net/github/branches/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/branches "GitHub branches")
-[![Github commits](https://flat.badgen.net/github/commits/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/commits "Github commits")
+[![Github commits](https://flat.badgen.net/github/commits/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/commits/main "Github commits")
 [![GitHub issues](https://flat.badgen.net/github/issues/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/issues "GitHub issues")
 [![GitHub pull requests](https://flat.badgen.net/github/prs/sanidhyy/brainwave?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/brainwave/pulls "GitHub pull requests")
 [![Netlify Status](https://api.netlify.com/api/v1/badges/12f8872e-e503-44e8-aaee-9d024f8cba55/deploy-status)](https://app-brainwave.netlify.app/ "Netlify Status")
@@ -24,6 +24,7 @@
 
 - [Folder Structure](#bangbang-folder-structure)
 - [Getting Started](#toolbox-getting-started)
+- [Authentication System](#lock-authentication-system)
 - [Screenshots](#camera-screenshots)
 - [Tech Stack](#gear-tech-stack)
 - [Stats](#wrench-stats)
@@ -63,6 +64,7 @@ brainwave/
         |--- svg/
         |--- index.js
     |-- components/
+        |--- auth/           # NEW: Authentication components
         |--- design/
         |--- Benefits.jsx
         |--- Button.jsx
@@ -95,6 +97,7 @@ brainwave/
   |- postcss.config.js
   |- tailwind.config.js
   |- vite.config.js
+  |- AUTH_SETUP.md          # NEW: Authentication setup guide
 ```
 
 <br />
@@ -107,6 +110,31 @@ brainwave/
 4. Now app is fully configured 👍 and you can start using this app using either one of `npm run dev` or `yarn dev`.
 
 **NOTE:** Please make sure to keep your API keys and configuration values secure and do not expose them publicly.
+
+## :lock: Authentication System
+
+This project now includes a complete authentication system with the following features:
+
+### 🔐 Authentication Pages
+- **Sign In** - Email/password authentication with validation
+- **Sign Up** - User registration with comprehensive form validation  
+- **Forgot Password** - Password reset functionality
+- **Dashboard** - Protected area for authenticated users
+
+### ✨ Features
+- **Clerk Integration** - Professional authentication service
+- **Form Validation** - Real-time validation with error messages
+- **Micro-interactions** - Smooth animations using Framer Motion
+- **Responsive Design** - Mobile-first approach
+- **Protected Routes** - Secure access control
+- **Dark Theme** - Consistent with main application design
+
+### 🚀 Quick Setup
+1. Get your Clerk publishable key from [Clerk Dashboard](https://dashboard.clerk.com/)
+2. Create a `.env` file with: `VITE_CLERK_PUBLISHABLE_KEY=your_key_here`
+3. Run `npm run dev` to start the application
+
+For detailed setup instructions, see [AUTH_SETUP.md](./AUTH_SETUP.md).
 
 ## :camera: Screenshots
 
@@ -122,6 +150,11 @@ brainwave/
 
 [![React JS](https://skillicons.dev/icons?i=react "React JS")](https://react.dev/ "React JS") [![Vite JS](https://skillicons.dev/icons?i=vite "Vite JS")](https://vitejs.dev/ "Vite JS") [![Javascript](https://skillicons.dev/icons?i=js "Javascript")](https://developer.mozilla.org/en-US/docs/Web/JavaScript "Javascript") [![Tailwind CSS](https://skillicons.dev/icons?i=tailwind "Tailwind CSS")](https://tailwindcss.com/ "Tailwind CSS") [![Netlify](https://skillicons.dev/icons?i=netlify "Netlify")](https://netlify.app/ "Netlify")
 
+### Authentication & Animations
+- **Clerk** - Professional authentication service
+- **Framer Motion** - Advanced animations and micro-interactions
+- **React Router** - Client-side routing with protected routes
+
 ## :wrench: Stats
 
 [![Stats for Brainwave](/.github/images/stats.svg "Stats for Brainwave")](https://pagespeed.web.dev/analysis?url=https://app-brainwave.netlify.app/ "Stats for Brainwave")
@@ -134,24 +167,25 @@ You might encounter some bugs while using this app. You are more than welcome to
 
 Useful resources and dependencies that are used in Brainwave.
 
-- [framer-motion](https://www.npmjs.com/package/framer-motion): ^11.0.12
-- [react](https://www.npmjs.com/package/react): ^18.2.0
-- [react-dom](https://www.npmjs.com/package/react-dom): ^18.2.0
+- [framer-motion](https://www.npmjs.com/package/framer-motion): ^12.23.12
+- [react](https://www.npmjs.com/package/react): ^18.3.1
+- [react-dom](https://www.npmjs.com/package/react-dom): ^18.3.1
 - [react-just-parallax](https://www.npmjs.com/package/react-just-parallax): ^3.1.16
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom): ^6.22.3
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom): ^7.8.2
 - [scroll-lock](https://www.npmjs.com/package/scroll-lock): ^2.1.5
-- [typewriter-effect](https://www.npmjs.com/package/typewriter-effect): ^2.21.0
-- [@types/react](https://www.npmjs.com/package/@types/react): ^18.2.56
-- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^18.2.19
-- [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react): ^4.2.1
-- [autoprefixer](https://www.npmjs.com/package/autoprefixer): ^10.4.18
+- [typewriter-effect](https://www.npmjs.com/package/typewriter-effect): ^2.22.0
+- [@clerk/clerk-react](https://www.npmjs.com/package/@clerk/clerk-react): ^4.29.7
+- [@types/react](https://www.npmjs.com/package/@types/react): ^18.3.12
+- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): ^18.3.1
+- [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react): ^5.0.1
+- [autoprefixer](https://www.npmjs.com/package/autoprefixer): ^10.4.21
 - [eslint](https://www.npmjs.com/package/eslint): ^8.56.0
 - [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react): ^7.33.2
-- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^4.6.0
-- [eslint-plugin-react-refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh): ^0.4.5
-- [postcss](https://www.npmjs.com/package/postcss): ^8.4.35
-- [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^3.4.1
-- [vite](https://www.npmjs.com/package/vite): ^5.1.4
+- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): ^5.2.0
+- [eslint-plugin-react-refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh): ^0.4.20
+- [postcss](https://www.npmjs.com/package/postcss): ^8.5.6
+- [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^3.4.17
+- [vite](https://www.npmjs.com/package/vite): ^7.1.3
 
 ## :coffee: Buy Me a Coffee
 
